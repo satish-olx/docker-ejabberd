@@ -1,13 +1,13 @@
 FROM debian:jessie
 MAINTAINER Rafael Römhild <rafael@roemhild.de>
 
-ENV EJABBERD_BRANCH=17.04 \
+ENV EJABBERD_BRANCH=17.06 \
     EJABBERD_USER=ejabberd \
     EJABBERD_HTTPS=true \
     EJABBERD_STARTTLS=true \
     EJABBERD_S2S_SSL=true \
     EJABBERD_HOME=/opt/ejabberd \
-    EJABBERD_DEBUG_MODE=false \
+    EJABBERD_DEBUG_MODE=true \
     HOME=$EJABBERD_HOME \
     PATH=$EJABBERD_HOME/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     DEBIAN_FRONTEND=noninteractive \
@@ -95,8 +95,6 @@ ADD ./run.sh /sbin/run
 
 # Add run scripts
 ADD ./scripts $EJABBERD_HOME/scripts
-ADD https://raw.githubusercontent.com/rankenstein/ejabberd-auth-mysql/master/auth_mysql.py $EJABBERD_HOME/scripts/lib/auth_mysql.py
-RUN chmod a+rx $EJABBERD_HOME/scripts/lib/auth_mysql.py
 
 # Add config templates
 ADD ./conf /opt/ejabberd/conf
